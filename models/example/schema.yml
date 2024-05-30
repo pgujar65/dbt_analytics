@@ -19,3 +19,7 @@ models:
             tests:
                 - unique
                 - not_null
+
+    - name: rpt_in_wallbay_scan_report
+      description: "Wallbay reporting table"
+
