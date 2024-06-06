@@ -1,0 +1,9 @@
+version: 2
+#Version 2 is the current and recommended version for defining sources, tests, and other configurations in dbt. This version introduces several improvements and standardizations over previous versions. 
+#By specifying version: 2, you ensure that dbt interprets the file according to these newer, more robust standards.
+sources:
+  - name: GDH_SILVER
+    tables:
+      - name: dim_product
+      - name: dim_store
+
