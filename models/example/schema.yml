@@ -1,25 +1,32 @@
-
 version: 2
 
 models:
-    - name: my_first_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+  - name: my_first_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
 
-    - name: my_second_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+  - name: my_second_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
 
-    - name: rpt_in_wallbay_scan_report
-      description: "Wallbay reporting table"
+  - name: wallbay_scan_date
+    description: "Wallbay Har table"
 
+  - name: sr_detail_asset_join
+    description: "Sr Detail Har table"
+
+  - name: rpt_in_wallbay_scan_missing_sr_details
+    description: "Wallbay Reporting table"
+
+  - name: rpt_in_wallbay_scan_report
+    description: "Wallbay Missing value table"
