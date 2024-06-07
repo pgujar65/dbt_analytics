@@ -1,0 +1,12 @@
+sources:
+  - name: GDH_SILVER
+    tables:
+      - name: dim_product
+      - name: dim_store
+  - name: RAW_DATA
+    tables:
+      - name: in_wallbay_sr_detail
+      - name: in_wallbay_scan_zylem
+     
+
+
