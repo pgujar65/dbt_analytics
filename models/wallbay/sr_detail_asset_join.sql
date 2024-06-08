@@ -1,14 +1,17 @@
 
-{{ config(schema='HARMONIZATION', materialized='table') }}
+{{ config(schema=generate_schema_name('HARMONIZATION'),
+             materialized='table'
+            )}}
 
 WITH sr_detail AS (
   SELECT * 
-  FROM RAW_DATA.in_wallbay_sr_detail
+  FROM {{ source('RAW_DATA', 'in_wallbay_sr_detail') }}
   WHERE civil != 'CSD'
 ),
 wallbayScanReportData AS (
   SELECT * 
-  FROM RAW_DATA.in_wallbay_scan_zylem
+  FROM {{ source('RAW_DATA', 'in_wallbay_scan_zylem') }}
+
 ),
 srDetailDataSelected AS ( 
   SELECT DISTINCT b.region, a.state, a.city, a.sales_representative_name, a.asset_no, a.customer_id, a.licence_no, a.wallbay_description
@@ -25,3 +28,4 @@ SELECT DISTINCT *
 FROM srDetailAssign
 JOIN srDetailDataSelected
 USING (region, state, city, sales_representative_name)
+

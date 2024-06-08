@@ -35,12 +35,13 @@ wallbayScanDate as
 (
 SELECT *,
      
-       CASE
-         WHEN EXTRACT(day from date) BETWEEN 1 AND 8 THEN 'Week1'
-         WHEN EXTRACT(day from date) BETWEEN 9 AND 15 THEN 'Week2'
-         WHEN EXTRACT(day from date) BETWEEN 16 AND 22 THEN 'Week3'
-         ELSE 'Week4'
-       END AS week
+    CASE
+    WHEN EXTRACT(DAY FROM DATE(date)) BETWEEN 1 AND 8 THEN 'Week1'
+    WHEN EXTRACT(DAY FROM DATE(date)) BETWEEN 9 AND 15 THEN 'Week2'
+    WHEN EXTRACT(DAY FROM DATE(date)) BETWEEN 16 AND 22 THEN 'Week3'
+    WHEN EXTRACT(DAY FROM DATE(date)) BETWEEN 23 AND 31 THEN 'Week4'
+    ELSE 'Other'
+  END AS week
 FROM wallbayScanDupsRemove
 where rw_no = 1 
 ),

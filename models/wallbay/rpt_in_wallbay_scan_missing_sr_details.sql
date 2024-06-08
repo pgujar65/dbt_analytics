@@ -1,5 +1,11 @@
 
-{{ config(schema='REPORTING', materialized='table') }}
+
+{{ config(schema=generate_schema_name('REPORTING'),
+             materialized='table',
+            pre_hook = "
+                SELECT 1 AS Dummy FROM {{ ref('rpt_in_wallbay_scan_report') }};
+            "
+            )}}
 
 SELECT 
     a.region, 
@@ -9,9 +15,10 @@ SELECT
     a.asset_no, 
     MAX(a.date) AS last_scan_date
 FROM 
-    RAW_DATA_HARMONIZATION.wallbay_scan_date AS a
+     {{ source('HARMONIZATION', 'wallbay_scan_date') }} a 
 LEFT JOIN 
-    RAW_DATA_HARMONIZATION.sr_detail_asset_join AS b 
+     {{ source('HARMONIZATION', 'sr_detail_asset_join') }} AS b 
+
 ON 
     a.asset_no = b.asset_no 
     AND a.customer_id = b.customer_id 

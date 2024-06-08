@@ -7,6 +7,20 @@ sources:
     tables:
       - name: in_wallbay_sr_detail
       - name: in_wallbay_scan_zylem
-     
+    
+  - name: HARMONIZATION
+    tables:
+      - name: sr_detail_asset_join
+      - name: wallbay_scan_date
 
+  - name: REPORTING
+    tables:
+      - name: lineage_testing
 
+  - name: parquet_load
+    schema: parquet
+    tables:
+      - name: dummyFile
+        identifier: "seeds/parquet_file_testing.parquet"
+        quoting:
+          identifier: true
