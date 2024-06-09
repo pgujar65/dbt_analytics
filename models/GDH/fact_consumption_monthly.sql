@@ -1,11 +1,7 @@
-{{ config(schema=generate_schema_name('REPORTING'),
+{{ config(schema=generate_schema_name('GDH_GOLD'),
              materialized='table',
-           pre_hook = "
-                SELECT 1 AS Dummy FROM {{ ref('dim_product') }};
-                SELECT 1 AS Dummy FROM {{ ref('dim_store') }};
-            "
 
             )}}
 
 select *  
-FROM {{ source('GDH_GOLD', 'dim_product') }}
+FROM {{ source('GDH_SILVER', 'fact_consumption_monthly') }}

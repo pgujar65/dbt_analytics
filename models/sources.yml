@@ -3,11 +3,18 @@ sources:
     tables:
       - name: dim_product
       - name: dim_store
+      - name: fact_consumption_monthly
 
   - name: GDH_GOLD
     tables:
       - name: dim_product
       - name: dim_store
+      - name: fact_consumption_monthly
+      - name: dim_calendar
+
+  - name: GDH_REPORTING
+    tables:
+      - name: fact_consumption_nabca_sam_monthly
 
   - name: RAW_DATA
     tables:
