@@ -1,4 +1,4 @@
-{% snapshot dim_product_snapshot %}
+{% snapshot dim_product %}
 
 {{
     config(
