@@ -4,12 +4,15 @@
 }}
 WITH sr_detail AS (
 select * 
-  FROM {{ source('RAW_DATA', 'in_wallbay_sr_detail') }}
+  FROM --{{ source('RAW_DATA', 'in_wallbay_sr_detail') }}
+  {{ ref('in_wallbay_sr_detail') }}
 where civil != "CSD"
 ),
 wallbayScanReportData AS (
   SELECT * 
-  FROM {{ source('RAW_DATA', 'in_wallbay_scan_zylem') }}
+  FROM --{{ source('RAW_DATA', 'in_wallbay_scan_zylem') }}
+    {{ ref('in_wallbay_scan_zylem') }}
+
 ),
 srDetailDataSelected AS ( 
   SELECT DISTINCT b.region, a.state, a.city, a.sales_representative_name, a.asset_no, a.customer_id, a.licence_no, a.wallbay_description

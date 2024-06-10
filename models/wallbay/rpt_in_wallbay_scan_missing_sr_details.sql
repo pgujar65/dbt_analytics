@@ -15,7 +15,8 @@ SELECT
     a.asset_no, 
     MAX(a.date) AS last_scan_date
 FROM 
-     {{ source('HARMONIZATION', 'wallbay_scan_date') }} a 
+     {{ source('HARMONIZATION', 'wallbay_scan_date') }}
+      a 
 LEFT JOIN 
      {{ source('HARMONIZATION', 'sr_detail_asset_join') }} AS b 
 
