@@ -1,0 +1,102 @@
+{{ config(schema=generate_schema_name('GDH_US_CONSM'),
+             materialized='table',
+           pre_hook = "
+                SELECT 1 AS Dummy FROM {{ ref('fact_nabca_sam_consumption_cyly_monthly') }};
+                  "
+
+            )}}
+
+SELECT 
+product_key,
+store_key,
+date
+units_cy,
+        {{ rolling_sum('units_cy', 'date',2)  }} as units_cy_3m,
+        {{ rolling_sum('units_cy', 'date', 5) }} as units_cy_6m,
+        {{ rolling_sum('units_cy', 'date', 11) }} as units_cy_12m,
+        {{ rolling_sum('units_cy', 'date', 1000000) }} as units_cy_ytd,
+units_ly,
+        {{ rolling_sum('units_ly', 'date', 2) }} as units_ly_3m,
+        {{ rolling_sum('units_ly', 'date', 5) }} as units_ly_6m,
+        {{ rolling_sum('units_ly', 'date', 11) }} as units_ly_12m,
+        {{ rolling_sum('units_ly', 'date', 1000000) }} as units_ly_ytd,
+dol_cy,
+        {{ rolling_sum('dol_cy', 'date', 2) }} as dol_cy_3m,
+        {{ rolling_sum('dol_cy', 'date', 5) }} as dol_cy_6m,
+        {{ rolling_sum('dol_cy', 'date', 11) }} as dol_cy_12m,
+        {{ rolling_sum('dol_cy', 'date', 1000000) }} as dol_cy_ytd,
+dol_ly,
+        {{ rolling_sum('dol_ly', 'date', 2) }} as dol_ly_3m,
+        {{ rolling_sum('dol_ly', 'date', 5) }} as dol_ly_6m,
+        {{ rolling_sum('dol_ly', 'date', 11) }} as dol_ly_12m,
+        {{ rolling_sum('dol_ly', 'date', 1000000) }} as dol_ly_ytd,
+
+actual_cases_cy,
+        {{ rolling_sum('actual_cases_cy', 'date', 2) }} as actual_cases_cy_3m,
+        {{ rolling_sum('actual_cases_cy', 'date', 5) }} as actual_cases_cy_6m,
+        {{ rolling_sum('actual_cases_cy', 'date', 11) }} as actual_cases_cy_12m,
+        {{ rolling_sum('actual_cases_cy', 'date', 1000000) }} as actual_cases_cy_ytd,
+actual_cases_ly,
+        {{ rolling_sum('actual_cases_ly', 'date', 2) }} as actual_cases_ly_3m,
+        {{ rolling_sum('actual_cases_ly', 'date', 5) }} as actual_cases_ly_6m,
+        {{ rolling_sum('actual_cases_ly', 'date', 11) }} as actual_cases_ly_12m,
+        {{ rolling_sum('actual_cases_ly', 'date', 1000000) }} as actual_cases_ly_ytd,
+
+standard_cases_cy,
+        {{ rolling_sum('standard_cases_cy', 'date', 2) }} as standard_cases_cy_3m,
+        {{ rolling_sum('standard_cases_cy', 'date', 5) }} as standard_cases_cy_6m,
+        {{ rolling_sum('standard_cases_cy', 'date', 11) }} as standard_cases_cy_12m,
+        {{ rolling_sum('standard_cases_cy', 'date', 1000000) }} as standard_cases_cy_ytd,
+standard_cases_ly,
+        {{ rolling_sum('standard_cases_ly', 'date', 2) }} as standard_cases_ly_3m,
+        {{ rolling_sum('standard_cases_ly', 'date', 5) }} as standard_cases_ly_6m,
+        {{ rolling_sum('standard_cases_ly', 'date', 11) }} as standard_cases_ly_12m,
+        {{ rolling_sum('standard_cases_ly', 'date', 1000000) }} as standard_cases_ly_ytd,
+
+eq_9l_cy,
+        {{ rolling_sum('eq_9l_cy', 'date', 2) }} as eq_9l_cy_3m,
+        {{ rolling_sum('eq_9l_cy', 'date', 5) }} as eq_9l_cy_6m,
+        {{ rolling_sum('eq_9l_cy', 'date', 11) }} as eq_9l_cy_12m,
+        {{ rolling_sum('eq_9l_cy', 'date', 1000000) }} as eq_9l_cy_ytd,
+eq_9l_ly,
+        {{ rolling_sum('eq_9l_ly', 'date', 2) }} as eq_9l_ly_3m,
+        {{ rolling_sum('eq_9l_ly','date', 5) }} as eq_9l_ly_6m,
+        {{ rolling_sum('eq_9l_ly', 'date', 11) }} as eq_9l_ly_12m,
+        {{ rolling_sum('eq_9l_ly', 'date', 1000000) }} as eq_9l_ly_ytd,
+
+fob_price_cy,
+        {{ rolling_avg('fob_price_cy', 'date', 2) }} as fob_price_cy_3m,
+        {{ rolling_avg('fob_price_cy', 'date', 5) }} as fob_price_cy_6m,
+        {{ rolling_avg('fob_price_cy', 'date', 11) }} as fob_price_cy_12m,
+        {{ rolling_avg('fob_price_cy', 'date', 1000000) }} as fob_price_cy_ytd,
+fob_price_ly,
+        {{ rolling_avg('fob_price_ly', 'date', 2) }} as fob_price_ly_3m,
+        {{ rolling_avg('fob_price_ly', 'date', 5) }} as fob_price_ly_6m,
+        {{ rolling_avg('fob_price_ly', 'date', 11) }} as fob_price_ly_12m,
+        {{ rolling_avg('fob_price_ly', 'date', 1000000) }} as fob_price_ly_ytd,
+
+shelf_price_cy,
+        {{ rolling_avg('shelf_price_cy', 'date', 2) }} as shelf_price_cy_3m,
+        {{ rolling_avg('shelf_price_cy', 'date', 5) }} as shelf_price_cy_6m,
+        {{ rolling_avg('shelf_price_cy', 'date', 11) }} as shelf_price_cy_12m,
+        {{ rolling_avg('shelf_price_cy', 'date', 1000000) }} as shelf_price_cy_ytd,
+shelf_price_ly,
+        {{ rolling_avg('shelf_price_ly', 'date', 2) }} as shelf_price_ly_3m,
+        {{ rolling_avg('shelf_price_ly', 'date', 5) }} as shelf_price_ly_6m,
+        {{ rolling_avg('shelf_price_ly', 'date', 11) }} as shelf_price_ly_12m,
+        {{ rolling_avg('shelf_price_ly', 'date', 1000000) }} as shelf_price_ly_ytd,
+
+retail_price_cy,
+        {{ rolling_avg('retail_price_cy', 'date', 2) }} as retail_price_cy_3m,
+        {{ rolling_avg('retail_price_cy', 'date', 5) }} as retail_price_cy_6m,
+        {{ rolling_avg('retail_price_cy', 'date', 11) }} as retail_price_cy_12m,
+        {{ rolling_avg('retail_price_cy', 'date', 1000000) }} as retail_price_cy_ytd,
+retail_price_ly,
+        {{ rolling_avg('retail_price_ly', 'date', 2) }} as retail_price_ly_3m,
+        {{ rolling_avg('retail_price_ly', 'date', 5) }} as retail_price_ly_6m,
+        {{ rolling_avg('retail_price_ly', 'date', 11) }} as retail_price_ly_12m,
+        {{ rolling_avg('retail_price_ly', 'date', 1000000) }} as retail_price_ly_ytd
+		
+FROM 
+--GDH_REPORTING.fact_consumption_nabca_sam_monthly_cyly
+ {{ ref('fact_nabca_sam_consumption_cyly_monthly') }}

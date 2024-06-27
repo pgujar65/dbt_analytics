@@ -1,17 +1,40 @@
 sources:
   - name: GDH_SILVER
     tables:
+      - name: dim_address
+      - name: dim_license
       - name: dim_product
+      - name: dim_product_additional
       - name: dim_store
+      - name: dim_store_additional
+
+      - name: fact_consumption_weekly
       - name: fact_consumption_monthly
 
   - name: GDH_GOLD
     tables:
-      - name: dim_product
-      - name: dim_store
-      - name: fact_consumption_monthly
       - name: dim_calendar
+      - name: dim_address
+      - name: dim_license
+      - name: dim_product
+      - name: dim_product_additional
+      - name: dim_store
+      - name: dim_store_additional
 
+      - name: fact_consumption_weekly
+      - name: fact_consumption_monthly
+
+  - name: GDH_US_VIEW
+    tables:
+      - name: dim_product_nabca_sam
+      - name: dim_store_nabca_sam
+      - name: fact_consumption_nabca_sam_weekly
+      - name: fact_consumption_nabca_sam_monthly
+
+  - name: GDH_US_CONSM
+    tables:
+      - name: fact_nabca_sam_consumption_cyly_monthly
+  
   - name: GDH_REPORTING
     tables:
       - name: fact_consumption_nabca_sam_monthly

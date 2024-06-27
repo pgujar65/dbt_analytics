@@ -11,7 +11,7 @@ product_key,
 store_key,
 date
 units_cy,
-        {{ rolling_sum('units_cy', 'date', 2) }} as units_cy_3m,
+        {{ rolling_sum('units_cy', 'date',2)  }} as units_cy_3m,
         {{ rolling_sum('units_cy', 'date', 5) }} as units_cy_6m,
         {{ rolling_sum('units_cy', 'date', 11) }} as units_cy_12m,
         {{ rolling_sum('units_cy', 'date', 1000000) }} as units_cy_ytd,

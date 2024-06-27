@@ -5,3 +5,11 @@
         rows between {{ period }} preceding and current row
     )
 {% endmacro %}
+
+{% macro rolling_avg(column, date_column, period) %}
+    AVG({{ column }}) over (
+        partition by product_key,store_key
+        order by {{ date_column }}
+        rows between {{ period }} preceding and current row
+    )
+{% endmacro %}

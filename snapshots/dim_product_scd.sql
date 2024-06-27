@@ -7,11 +7,14 @@
       unique_key='product_key',
 
       strategy='check',
-      check_cols=['short_product_desc', 'long_product_desc', 'alcohol_type', 'rec_crt_dt'],  
+      check_cols=['beam_product_key','short_product_desc','long_product_desc','alcohol_type','brand_extension','brand_category','brand_subcategory','segment','brand_family','age','flavor','container_type','bottle_per_case','proof','alcohol_content','size','size_in_ml','upc','manufacturer','src_sys_nm'],  
       updated_at='rec_crt_dt',
     )
 }}
 
-select * from {{ source('GDH_SILVER', 'dim_product') }}
+SELECT *,
+true as is_active
+ FROM {{ source('GDH_SILVER', 'dim_product') }}
+WHERE rec_crt_dt IS NOT NULL
 
 {% endsnapshot %}
