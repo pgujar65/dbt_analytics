@@ -9,7 +9,7 @@
 SELECT 
 product_key,
 store_key,
-date
+date,
 units_cy,
         {{ rolling_sum('units_cy', 'date',2)  }} as units_cy_3m,
         {{ rolling_sum('units_cy', 'date', 5) }} as units_cy_6m,
